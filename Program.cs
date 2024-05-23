@@ -150,7 +150,9 @@ public class VendingMachineService : IVending
         int totalPrice = purchasedProducts.Sum(p => p.Cost);
 
         Console.WriteLine("Transaction ended. Change returned: " + string.Join(", ", change.Select(c => $"{c.Value}x{c.Key}kr")));
+        // Visar alla köpta varor
         Console.WriteLine($"Total products purchased: {totalProducts}");
+        // Visar totala priset
         Console.WriteLine($"Total price: {totalPrice}kr");
 
         // Töm listan över köpta produkter efter transaktionen
@@ -213,7 +215,21 @@ class Program
                         var change = vendingMachine.EndTransaction();
                         break;
                     case 6:
-                        return;
+                         // Fråga användaren om de vill avsluta programmet och säkerställer att användaren inte avslutar programmet av misstag.
+                        Console.Write("Are you sure you want to exit? (yes/no): ");
+                        string confirmExit = Console.ReadLine();
+
+                        // Kontrollerar om användarens svar är "yes" (oberoende av versaler/gemener).
+                        if (confirmExit.Equals("yes", StringComparison.OrdinalIgnoreCase)) 
+                        {
+                            // Avsluta programmet
+                            return;
+                        }
+                        else
+                        {
+                            // Fortsätt köra programmet
+                            break;
+                        }
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
