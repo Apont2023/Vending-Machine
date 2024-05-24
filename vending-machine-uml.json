@@ -1,0 +1,96 @@
+{
+  "classes": [
+    {
+      "name": "IVending",
+      "type": "interface",
+      "methods": [
+        { "name": "Purchase", "params": ["productId: int"], "returnType": "void" },
+        { "name": "ShowAll", "params": [], "returnType": "List<string>" },
+        { "name": "Details", "params": ["productId: int"], "returnType": "string" },
+        { "name": "InsertMoney", "params": ["amount: int"], "returnType": "void" },
+        { "name": "EndTransaction", "params": [], "returnType": "Dictionary<int, int>" }
+      ]
+    },
+    {
+      "name": "Product",
+      "type": "abstract class",
+      "attributes": [
+        { "name": "Id", "type": "int" },
+        { "name": "Name", "type": "string" },
+        { "name": "Cost", "type": "int" }
+      ],
+      "methods": [
+        { "name": "Examine", "params": [], "returnType": "string" },
+        { "name": "Use", "params": [], "returnType": "string" }
+      ]
+    },
+    {
+      "name": "Drink",
+      "type": "class",
+      "inherits": "Product",
+      "attributes": [
+        { "name": "Volume", "type": "int" }
+      ],
+      "methods": [
+        { "name": "Examine", "params": [], "returnType": "string" },
+        { "name": "Use", "params": [], "returnType": "string" }
+      ]
+    },
+    {
+      "name": "Snack",
+      "type": "class",
+      "inherits": "Product",
+      "attributes": [
+        { "name": "Weight", "type": "int" }
+      ],
+      "methods": [
+        { "name": "Examine", "params": [], "returnType": "string" },
+        { "name": "Use", "params": [], "returnType": "string" }
+      ]
+    },
+    {
+      "name": "Toy",
+      "type": "class",
+      "inherits": "Product",
+      "attributes": [
+        { "name": "Material", "type": "string" }
+      ],
+      "methods": [
+        { "name": "Examine", "params": [], "returnType": "string" },
+        { "name": "Use", "params": [], "returnType": "string" }
+      ]
+    },
+    {
+      "name": "VendingMachineService",
+      "type": "class",
+      "implements": "IVending",
+      "attributes": [
+        { "name": "products", "type": "List<Product>" },
+        { "name": "validDenominations", "type": "List<int>" },
+        { "name": "moneyPool", "type": "int" },
+        { "name": "purchasedProducts", "type": "List<Product>" }
+      ],
+      "methods": [
+        { "name": "VendingMachineService", "params": [], "returnType": "constructor" },
+        { "name": "Purchase", "params": ["productId: int"], "returnType": "void" },
+        { "name": "ShowAll", "params": [], "returnType": "List<string>" },
+        { "name": "Details", "params": ["productId: int"], "returnType": "string" },
+        { "name": "InsertMoney", "params": ["amount: int"], "returnType": "void" },
+        { "name": "EndTransaction", "params": [], "returnType": "Dictionary<int, int>" }
+      ]
+    },
+    {
+      "name": "Program",
+      "type": "class",
+      "methods": [
+        { "name": "Main", "params": ["args: string[]"], "returnType": "void" }
+      ]
+    }
+  ],
+  "relations": [
+    { "from": "Product", "to": "Drink", "type": "inheritance" },
+    { "from": "Product", "to": "Snack", "type": "inheritance" },
+    { "from": "Product", "to": "Toy", "type": "inheritance" },
+    { "from": "IVending", "to": "VendingMachineService", "type": "implementation" }
+  ]
+}
